@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -67,7 +66,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-=======
-# Books-n-Stuff
-(WORK IN PROGRESS) A website to purchase books and other media item. Built with the PERN stack with an emphasis on React and Redux.
->>>>>>> 09abd435a528fff65f16a8007ef5a60e5718d0d1
