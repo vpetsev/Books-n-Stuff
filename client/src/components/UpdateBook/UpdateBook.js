@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import * as actionTypes from "../store/actions/actionTypes";
+import React, { useState, useEffect } from "react";
+import * as actionTypes from "../../store/actions/actionTypes";
 import Button from "react-bootstrap/Button"
 import Modal from 'react-bootstrap/Modal'
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl"
+import "./UpdateBook.css"
 
-function UpdateBook(book) {
+function UpdateBook(props) {
     const [show, setShow] = useState(false)
     const [updatedBook, setUpdatedBook] = useState({})
+    const [book, setBook] = useState({})
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true)
 
     const handleTextBoxChange = (e) => {
+        
         setUpdatedBook({
             ...updatedBook,
             [e.target.name]: e.target.value
@@ -21,17 +23,23 @@ function UpdateBook(book) {
     }
 
     const handleUpdate = () => {
-        fetch("http://localhost:8008/update-post", {
+        fetch("http://localhost:8008/update-book", {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
             },
-            body: JSON.stringify({book: book})
+            body: JSON.stringify(updatedBook)
+        }).then(() => {
+            handleClose()
         })
     }
 
-    let bookInfo = book.book
-    console.log(bookInfo)
+    useEffect(() => {
+        setUpdatedBook(props.book)
+        setBook(props.books)
+    }, [])
+
+    // let bookInfo = props.book
     
     return (
         <>
@@ -48,12 +56,12 @@ function UpdateBook(book) {
                         {/* <InputGroup.Prepend>
                             <InputGroup.Text id="inputGroup-sizing-default">Default</InputGroup.Text>
                         </InputGroup.Prepend> */}
-                        <p>Title</p>
-                        <FormControl placeholder={bookInfo.title} value={bookInfo.title} name="title" onChange={handleTextBoxChange} />
-                        <FormControl placeholder={bookInfo.genre} value={bookInfo.genre} name="genre" onChange={handleTextBoxChange} />
-                        <FormControl placeholder={bookInfo.publisher} value={bookInfo.publisher} name="author" onChange={handleTextBoxChange} />
-                        <FormControl placeholder={bookInfo.year} value={bookInfo.year} name="year" onChange={handleTextBoxChange} />
-                        <FormControl placeholder="Image Link" value={ bookInfo.imageURL} name="imageURL" onChange={handleTextBoxChange} />
+                        <h3>{updatedBook.title}</h3>
+                        <FormControl placeholder={updatedBook.title} value={updatedBook.title} name="title" onChange={handleTextBoxChange} />
+                        <FormControl placeholder={updatedBook.genre} value={updatedBook.genre} name="genre" onChange={handleTextBoxChange} />
+                        <FormControl placeholder={updatedBook.publisher} value={updatedBook.publisher} name="author" onChange={handleTextBoxChange} />
+                        <FormControl placeholder={updatedBook.year} value={updatedBook.year} name="year" onChange={handleTextBoxChange} />
+                        <FormControl placeholder="Image Link" value={ updatedBook.imageURL} name="imageURL" onChange={handleTextBoxChange} />
                     </InputGroup>
                 </Modal.Body>
                 <Modal.Footer>
@@ -70,4 +78,4 @@ function UpdateBook(book) {
 }
 
 
-export default connect()(UpdateBook);
+export default UpdateBook;

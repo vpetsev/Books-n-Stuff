@@ -1,0 +1,29 @@
+/* Universal Styles */
+
+html {
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 560px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+input:focus {
+  outline: none;
+}
+
+/* Reusable Component - Image Container */
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.image-container img {
+  width: 100%;
+}

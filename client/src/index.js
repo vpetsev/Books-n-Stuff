@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from "redux";
 import booksReducer from "./store/reducers/books"
 import { Provider } from "react-redux"
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import { BaseLayout } from "./components/BaseLayout";
-import AddBook from './components/AddBook';
-import UpdateBook from "./components/UpdateBook"
+import { BaseLayout } from "./components/BaseLayout/BaseLayout";
+import AddBook from './components/AddBook/AddBook'
+import UpdateBook from "./components/UpdateBook/UpdateBook"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 

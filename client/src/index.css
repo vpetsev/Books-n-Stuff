@@ -12,31 +12,4 @@ code {
     monospace;
 }
 
-div {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-}
-
-img {
-  width: 50%;
-}
-
-ul {
-  display: flex;
-  width: 100%;
-}
-
-.menu { 
-  display: flex;
-  background-color: bisque;
-  padding: 15px;
-  justify-content: space-evenly;
-  width: 100%;
-  list-style-type: none;
-}
-
-.form-control {
-  width: 100%!important;
-}
 

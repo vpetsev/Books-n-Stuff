@@ -1,0 +1,17 @@
+.mb-3 {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+}
+
+.modal-body {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.input-group > .form-control {
+    width: 100%!important;
+}

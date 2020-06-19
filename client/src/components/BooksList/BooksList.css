@@ -1,0 +1,56 @@
+.book-container {
+    display: flex;
+
+}
+
+.BookList {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 4.4rem 10%;
+}
+
+.book {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 16.66rem;
+    margin: 0 .5rem 2.3rem .5rem;
+}
+
+.book .image-container {
+    height: 16.66rem;
+    margin-bottom: 1rem;
+}
+
+.book h2 {
+    margin-bottom: .5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.book-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-information p {
+    font-size: .88rem;
+    font-weight: 300;
+    line-height: 1rem;
+}
+
+.book-formgroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
+}
+
+.book-formgroup button {
+    width: 25vw;
+}
+
+
+
