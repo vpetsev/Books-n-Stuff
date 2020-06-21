@@ -26,7 +26,7 @@ function AddBook(props) {
             <input type="text" placeholder="title" name="title" onChange={handleTextBoxChange} />
             <input type="text" placeholder="genre" name="genre" onChange={handleTextBoxChange} />
             <input type="text" placeholder="author" name="author" onChange={handleTextBoxChange} />
-            <input type="text" placeholder="year" name="year" onChange={handleTextBoxChange} />
+            <input type="number" placeholder="year" name="year" onChange={handleTextBoxChange} />
             <input type="text" placeholder="imageURL" name="imageURL" onChange={handleTextBoxChange} />
             <button onClick={() => handleNewBook(newBook)}>Add Book</button>
         </div>

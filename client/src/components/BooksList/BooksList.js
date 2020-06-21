@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions/actionCreators";
+import * as actionCreators from "../../store/creators/actionCreators";
 import UpdateBook from "../UpdateBook/UpdateBook"
 import "./BooksList.css";
 
@@ -8,24 +8,27 @@ import "./BooksList.css";
 function BooksList(props) {
 
     useEffect(() => {
-        bookFetcher()
+        console.log("useEffectFired")
+        props.onLoadBooks()
     }, [])
 
     const handleRemoveBook = (book) => {
-        fetch(`http://localhost:8008/delete-book/${book.id}`, {
-            method: "POST",
-            headers: {
-                "Content-type":"application/json",
-            },
-            body: JSON.stringify({id: book.id})
-        })
+        console.log(book)
+        try {
+            fetch(`http://localhost:8008/delete-book/${book.id}`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({ id: book.id })
+            }).then(() => {
+                props.onLoadBooks()
+            })
+
+        } catch (error) {
+            console.log(error.message)
+        }
     }
-    
-    // <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-    //     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-    //     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-    //     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-    // </DropdownButton>
 
     const bookItems = props.loadedBooks.map(book => {
         return (
@@ -41,12 +44,10 @@ function BooksList(props) {
                     <p>{book.genre}</p>
                 </div>
                 <div className="book-formgroup">
-                    <button>button1</button>
-                    <button>button2</button>
-                    <button>button3</button>
-                    <UpdateBook book={book} />    
+                    <button onClick={() => handleRemoveBook(book)}>Delete</button>
                 </div>
             </div>
+            <UpdateBook book={book} />    
         </div>
         )
     })
@@ -72,9 +73,10 @@ function BooksList(props) {
         //         <br />
         //         <UpdateBook book={book}/>
         // </li>
+        
 const mapDispatchToProps = (dispatch) => {
     return {
-        onBooksLoaded: (books) => dispatch(actionCreators.loadBooks)
+        onLoadBooks: (books) => dispatch(actionCreators.loadBooks(books))
     }
 }
 

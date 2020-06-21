@@ -9,7 +9,6 @@ export function Menu() {
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/books">All Books</NavLink></li>
             <li><NavLink to="/add-book">Add New Books</NavLink></li>
-            <li><NavLink to="/update-book">Update a Book</NavLink></li>
         </ul>
     )
 }

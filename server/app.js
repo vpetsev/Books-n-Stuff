@@ -25,12 +25,15 @@ app.post("/add-book", async (req, res) => {
 
 app.post("/delete-book/:id", async (req, res) => {
     let passedBookId = req.body.id
+    console.log("delete book fired")
 
     models.Books.destroy({
         where: {
             id: passedBookId
         }
     })
+
+    res.json("book deleted")
 })
 
 app.post("/update-book", async (req, res) => {

@@ -7,6 +7,7 @@ function FilterBooks(props) {
 
     const onFilter = (genre) => {
         console.log(genre)
+
     }
 
     const bookCategories = props.loadedBooks.map(book => {
@@ -19,7 +20,6 @@ function FilterBooks(props) {
         <div className="filterDropDown">
             <DropdownButton id="dropdown-basic-button" title="Filter">
                 {bookCategories}
-
             </DropdownButton>
         </div>
     )

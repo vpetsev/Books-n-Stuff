@@ -1,6 +1,6 @@
 .book-container {
     display: flex;
-
+    justify-content: inherit;
 }
 
 .BookList {
@@ -32,7 +32,6 @@
 .book-information {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .book-information p {
@@ -45,11 +44,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: right;
+
 }
 
 .book-formgroup button {
-    width: 25vw;
+    width: 10vw;
 }
 
 
