@@ -1,56 +1,52 @@
 const express = require("express")
-const app = express()
-const models = require("./models")
 const cors = require("cors")
 
-app.use(cors())
-app.use(express.json())
+function createApp(models) {
+    const app = express()
+    app.use(cors())
+    app.use(express.json())
+    const route = handler => (req, res, next) => Promise.resolve(handler(req, res)).catch(next)
 
-app.get("/api/books", async (req, res) => {
-    let allBooks = await models.Books.findAll()
-    res.json(allBooks)
-})
+    app.get("/api/books", route(async (req, res) => {
+        res.json(await models.Books.findAll())
+    }))
 
-app.post("/add-book", async (req, res) => {
-    let newBook = await models.Books.build({
-        title: req.body.title,
-        genre: req.body.genre,
-        publisher: req.body.author,
-        year: req.body.year,
-        imageURL: req.body.imageURL
+    app.post("/add-book", route(async (req, res) => {
+        const book = await models.Books.create({
+            title: req.body.title,
+            genre: req.body.genre,
+            publisher: req.body.author,
+            year: req.body.year,
+            imageURL: req.body.imageURL
+        })
+        res.status(201).json(book)
+    }))
+
+    app.post("/delete-book/:id", route(async (req, res) => {
+        await models.Books.destroy({ where: { id: req.params.id } })
+        res.json({ message: "book deleted" })
+    }))
+
+    app.post("/update-book", route(async (req, res) => {
+        const [updated] = await models.Books.update({
+            title: req.body.title,
+            genre: req.body.genre,
+            publisher: req.body.author,
+            year: req.body.year,
+            imageURL: req.body.imageURL
+        }, { where: { id: req.body.id } })
+        res.json({ updated })
+    }))
+
+    app.use((error, req, res, next) => {
+        res.status(500).json({ error: "Unable to save or load books. Please try again." })
     })
+    return app
+}
 
-    await newBook.save()
-})
-
-app.post("/delete-book/:id", async (req, res) => {
-    let passedBookId = req.body.id
-    console.log("delete book fired")
-
-    models.Books.destroy({
-        where: {
-            id: passedBookId
-        }
+module.exports = { createApp }
+if (require.main === module) {
+    createApp(require("./models")).listen(8008, () => {
+        console.log("Server running on http://localhost:8008")
     })
-
-    res.json("book deleted")
-})
-
-app.post("/update-book", async (req, res) => {
-    await models.Books.update({
-        title: req.body.title,
-        genre: req.body.genre,
-        publisher: req.body.author,
-        year: req.body.year,
-        imageURL: req.body.imageURL
-    }, {
-        where: {
-            id: req.body.id
-        }
-    })
-})
-
-
-app.listen(8008, () => {
-    console.log("Server running on http://localhost:8008")
-})
+}
