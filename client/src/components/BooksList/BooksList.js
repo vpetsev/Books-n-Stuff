@@ -30,7 +30,7 @@ function BooksList(props) {
         }
     }
 
-    const bookItems = props.loadedBooks.map(book => {
+    const bookItems = props.loadedBooks.filter(book => !props.genre || book.genre === props.genre).map(book => {
         return (
         <div key={book.id} className="book">
             <div className="image-container">
